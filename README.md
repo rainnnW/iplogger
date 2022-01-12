@@ -1,3 +1,3 @@
 # iplogger
 this iplogger saves and also send logs via discord.
-Change webhook link at [iplogger.php#L22](iplogger.php#L22)
+Change webhook link at [index.php#L2](index.php#L2) and [index.php#L15](index.php#L15)
